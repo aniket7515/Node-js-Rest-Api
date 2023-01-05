@@ -4,6 +4,7 @@ const app=express();
 const PORT=process.env.PORT || 3000;
 const products_routes= require("./routes/products")
 
+app.use(express.json())
 
 const connectDB = require("./db/connection");
 

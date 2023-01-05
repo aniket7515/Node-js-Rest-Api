@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const productSchema= new mongoose.Schema({
     name:{
         type:String,
-        reuired:true,
+        reqired:true,
     },
     price:{
         type:Number,
@@ -20,10 +20,10 @@ const productSchema= new mongoose.Schema({
         type:Date,
         default:Date.now(),
     },
-    comapany:{
+    company:{
         type:String,
         enum:{
-            values:["apple","samsung","dell","mi","oneplus"],
+            values:["apple","samsung","dell","mi","oneplus","hp"],
             message:`{VALUE} is not supported`
         },
     },
