@@ -4,7 +4,7 @@ const getAllProducts= async(req,res)=>{
     // res.status(200).json({message:"I am getiinfg all products"})
     let data;
     try {
-        data=await Model.find();
+        data=await Model.find(req.query);
     } catch (error) {
         console.log(error);
     }
@@ -13,7 +13,14 @@ const getAllProducts= async(req,res)=>{
 }
 
 const getAllProductsTesting= async(req,res)=>{
-    res.status(200).json({message:"I am getiinfg all products testing"})
+    let data;
+    try {
+        data=await Model.find(req.query);
+    } catch (error) {
+        console.log(error);
+    }
+    if(!data) res.status(404).json({message:"No Products found"})
+    return res.status(200).json({data})
 }
 
 const putAllProducts= async(req,res)=>{
