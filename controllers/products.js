@@ -1,15 +1,28 @@
+const product = require('../models/product');
 const Model=require('../models/product')
 
 const getAllProducts= async(req,res)=>{
     // res.status(200).json({message:"I am getiinfg all products"})
-    let data;
-    try {
-        data=await Model.find(req.query);
-    } catch (error) {
-        console.log(error);
+    // let data;
+    // try {
+    //     data=await Model.find(req.query);
+    // } catch (error) {
+    //     console.log(error);
+    // }
+    // if(!data) res.status(404).json({message:"No Products found"})
+    // return res.status(200).json({data})
+    const {company,name} = req.query;
+    const queryObject={};
+    if(company){
+        queryObject.company=company;
+        console.log(queryObject.company);
     }
-    if(!data) res.status(404).json({message:"No Products found"})
-    return res.status(200).json({data})
+    if(name){
+        queryObject.name={$regex:name,$options:"i"};
+        // console.log(queryObject.name);
+    }
+    const myData=await product.find(queryObject)
+    res.status(200).json({myData})
 }
 
 const getAllProductsTesting= async(req,res)=>{
